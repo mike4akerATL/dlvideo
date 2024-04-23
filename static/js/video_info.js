@@ -52,6 +52,5 @@ function improve_button_dropdown()
 {
     $(".dropdown-menu li a").click(function(){
         $(".btn:first-child").html($(this).html());
-        // $(".btn:first-child").val($(this).text());
     });
 }
