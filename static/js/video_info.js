@@ -5,17 +5,17 @@ function bind_submit_with_ajax()
         event.preventDefault();
     
         // informs the user the download will begin
-        var new_elem = [
+        const dl_begin_elem = [
             '<div id="prepare_download_redirect" class="alert alert-info">',
             '<i class="fa fa-2x fa-spinner fa-spin"></i>',
             '<button type="button" class="close" data-dismiss="alert">×</button>',
             'Your download will begin shortly.',
             '</div>'].join('\n');
-        $(".messages").append(new_elem);
+        $(".messages").append(dl_begin_elem);
         $('button[type="submit"]').attr('disabled', 'disabled');
     
         // handles the post and progress with jQuery
-        var form = $(this);
+        const form = $(this);
         jQuery.ajax({
             url: form.attr("action"),
             method: 'POST',
@@ -27,15 +27,15 @@ function bind_submit_with_ajax()
             $( "#prepare_download_redirect" ).remove();
             $('button[type="submit"]').removeAttr('disabled');
             // also adds the download link for the user to click if the javascript redirect doesn't work
-            var download_redirect_url = response.download_redirect_url;
-            var new_elem = [
+            const download_redirect_url = response.download_redirect_url;
+            const dl_done_elem = [
                 '<div class="alert alert-success">',
                 '<i class="fa fa-2x fa-download"></i>',
                 '<button type="button" class="close" data-dismiss="alert">×</button>',
                 '<a href="' + download_redirect_url + '">',
                 'Your download is ready, click here to download on your computer.</a>',
                 '</div>'].join('\n');
-            $(".messages").append(new_elem);
+            $(".messages").append(dl_done_elem);
             // finally redirects to the file download
             window.location.replace(download_redirect_url);
         }).fail(function () {

@@ -165,9 +165,9 @@ def serve_file_helper(file_path, filename=None):
     response["Content-Length"] = os.path.getsize(file_path)
     # encodes the filename parameter of Content-Disposition header
     # http://stackoverflow.com/a/20933751
-    response[
-        "Content-Disposition"
-    ] = f"attachment; filename=\"{filename}\"; filename*=utf-8''{filename}"
+    response["Content-Disposition"] = (
+        f"attachment; filename=\"{filename}\"; filename*=utf-8''{filename}"
+    )
     return response
 
 
